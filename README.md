@@ -1,4 +1,171 @@
-# Flutter_study
+# Flutter 설치과정
+
+
+## 1. 간단히 플러터 설치과정
+
+[macOS install](https://flutter.dev/docs/get-started/install/macos)
+
+- 공식사이트에 접속하여서 zip파일을 받아서 만들어진 flutter 폴더를 terminal 에서
+
+```bash
+cd ~
+mkdir Developer
+```
+
+- 즉, Developer 폴더를 만드신 후에 다운로드 된 flutter 폴더를 옮깁니다.
+- MacOS 카날리나 이후의 zsh 방식의 terminal의 경우 .zshrc를 열어 PATH를 추가한다.
+
+[[Flutter] 맥에서 Flutter SDK 설치하기](https://eunjin3786.tistory.com/221)
+
+```bash
+open ~/.zshrc //또는, vim .zshrc를 통해 편집기를 열어 I를 눌러 수정
+export PATH=$PATH:~/Developer/flutter/bin //위 코드처럼 flutter 내의 bin 폴더까지 경로를 알맞게 추가 후 저장
+// vim의 경우 ESC 누른 후 :wq! 하여 저장 후 나온다
+source ~/.zshrc
+```
+
+<img width="682" alt="1" src="https://user-images.githubusercontent.com/65349445/126901137-61e7e64f-a3bd-42e7-a307-fe669b402497.png">
+
+- 이 상태까지 정상적으로 왔다면
+
+```bash
+flutter --version
+```
+
+- 입력했을때 아래 사진처럼 실행이 되어야 정상적이다.
+
+<img width="682" alt="2" src="https://user-images.githubusercontent.com/65349445/126901140-d4bbb13a-5ab0-49b2-a165-5ced1f88861e.png">
+
+- 그런다음에 flutter doctor를 입력하여 모든 체크사항을 알맞게 설치하면 된다.
+- 아래 사진처럼 모두 통과되기 위해서는 Android Studio, Xcode가 설치가 필요하다.
+
+<img width="724" alt="3" src="https://user-images.githubusercontent.com/65349445/126901142-cb8031cb-2238-4eec-8fce-fb629243e63d.png">
+
+- 이건 까먹었는데.. 아무튼 해당 명령어를 넣는게 좋을? 것이다.
+
+```bash
+flutter doctor --android-licenses
+```
+
+<img width="724" alt="4" src="https://user-images.githubusercontent.com/65349445/126901143-c27c7890-51ee-4ed1-9e24-03c581b5eaa5.png">
+
+## 2. Android 시뮬레이터 실행
+
+- Android Studio를 설치했다면, 아래의 Configure → Plugins 에서 Flutter를 설치한다.
+
+<img width="912" alt="5" src="https://user-images.githubusercontent.com/65349445/126901145-f91f4c63-747d-43cb-9c1c-31d97079ba2d.png">
+
+- 재시작 후 Create New Flutter Project를 눌러 프로젝트를 생성한다.
+
+<img width="778" alt="6" src="https://user-images.githubusercontent.com/65349445/126901146-2cd79780-5800-4c7c-8643-8942a508b044.png">
+
+- 그러고 나서 시뮬레이터 기본설정까지 되어있다면 기본 어플이 실행된다!
+
+<img width="1444" alt="7" src="https://user-images.githubusercontent.com/65349445/126901148-71c197c7-a779-4636-8a75-6838b445a858.png">
+
+## 3. iPhone 에뮬레이터 실행
+
+- 공식페이지 아래쪽 iOS setup 내용을 토대로 terminal에서 아래 코드를 입력한다.
+
+```bash
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+sudo xcodebuild -runFirstLaunch
+```
+
+<img width="724" alt="8" src="https://user-images.githubusercontent.com/65349445/126901151-8d134b53-04dc-45d9-b6f7-737f566db262.png">
+
+- 그다음 아래코드를 입력시 아이폰 시뮬레이터가 정상적으로 실행되어야 한다.
+
+```bash
+open -a Simulator
+```
+
+- 그러면 Android Studio 에서 기기선택에 iPhone이 잡히는 모습이 보인다!
+
+<img width="1444" alt="9" src="https://user-images.githubusercontent.com/65349445/126901154-2018fc82-b752-4868-b033-1bf8b339026b.png">
+
+- 잠깐 물마시고 돌아오면(2~3분정도 걸리는 느낌...) 실행이 되어있을것!
+
+<img width="1444" alt="10" src="https://user-images.githubusercontent.com/65349445/126901155-0989a9b7-4c86-43f0-bbf9-e3a7201c9d56.png">
+
+- 이러면 여기까지 두가지 시뮬레이터를 정상적으로 실행했다!
+
+<img width="1444" alt="11" src="https://user-images.githubusercontent.com/65349445/126901156-c267c308-9525-47ff-9849-81dc25d509f6.png">
+
+## 4. iPhone 실기기 추가설정과정
+
+- 하지만 위 과정만으로는 실제 아이폰 기기에서 실행할수가 없다. 추가적인 작업이 필요하다.
+- flutter 폴더 → iOS 폴더 내에 pod를 init, install 한다.
+
+<img width="724" alt="12" src="https://user-images.githubusercontent.com/65349445/126901157-59c34f03-f3b0-4f15-9479-d4197de7a346.png">
+
+- 이런식으로 xcworkpace 파일이 생겨야 정상이다.
+
+<img width="679" alt="13" src="https://user-images.githubusercontent.com/65349445/126901161-3cd95da7-1f3d-440f-8b94-69eb84c29fb9.png">
+
+- Android Studio 에서 iOS 폴더 우클릭 → Flutter → Open iOS module in Xcode
+- 또는, 위 사진에 만들어진 Runner.xcworkspace를 눌러 Xcode를 실행시킨다.
+
+<img width="1444" alt="14" src="https://user-images.githubusercontent.com/65349445/126901162-800d2b0d-c0b7-40e3-9e6e-7113024743d3.png">
+
+- Signing & Capabilities 에서 Team : None을 본인 계정으로 수정을 해줘야 한다.
+
+<img width="1512" alt="15" src="https://user-images.githubusercontent.com/65349445/126901165-40adb251-6feb-4f2b-82b7-84a611f369f6.png">
+
+- 여기까지만 해도 유선으로 연결하여 실기기 테스트가 가능한데, 케이블 빼고 아이폰에서 다시 실행시 검은색 화면에 이상한 영어가 보이면서 사용할 수 없게 된다.
+- 이 현상의 해결책은 Xcode 상단의 Product → Scheme → Edit Scheme 들어가서
+
+<img width="1399" alt="16" src="https://user-images.githubusercontent.com/65349445/126901170-50113269-9f3d-41ec-b5f5-b36dcce0d64d.png">
+
+- Run : Info : Build Configuration 값 : Debug → Release 로 변경 후 Close 한다.
+
+<img width="1399" alt="17" src="https://user-images.githubusercontent.com/65349445/126901171-061c244b-6a77-4bdf-ac2d-ea6bf22586fe.png">
+- 그러면 정상적으로 유선 해제 후에도 아이폰에서 다시 실행할 수 있다!
+
+## 5. 간단 코드 실행
+
+- 공식사이트의 예제 코드를 조금 변경해서 실행해봤다.
+
+[Write your first Flutter app, part 1](https://flutter.dev/docs/get-started/codelab)
+
+```dart
+// Copyright 2018 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Welcome to Flutter',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Welcome to Flutter'),
+        ),
+        body: const Center(
+          child: Text('Hello World/nDeveloper FDEE🙌'),
+        ),
+      ),
+    );
+  }
+}
+```
+
+- 해당코드를 실행한 결과사진이다!
+
+<img width="1440" alt="18" src="https://user-images.githubusercontent.com/65349445/126901172-f903dc37-9be8-464d-9447-529c869a9364.png">
+
+
+
+
+
+
+
+# Flustter 기본문법 : Youtube 정리
 [Youtube Link](https://www.youtube.com/watch?v=2g8DsOSreqk)
 ```dart
 void main() {
